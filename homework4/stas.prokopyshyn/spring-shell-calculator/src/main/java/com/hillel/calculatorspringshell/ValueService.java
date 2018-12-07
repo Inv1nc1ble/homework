@@ -2,9 +2,11 @@ package com.hillel.calculatorspringshell;
 
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class ValueService {
@@ -15,12 +17,6 @@ public class ValueService {
     }
 
     public List<Double> giveTheList(){
-        String[] arr = value.split(" ");
-        Double[] arrDl = new Double[arr.length];
-
-        for (int i = 0; i < arr.length; i++) {
-            arrDl[i] = Double.parseDouble(arr[i]);
-        }
-        return new ArrayList<>(Arrays.asList(arrDl));
+        return Arrays.stream(value.split(" ")).map(Double::parseDouble).collect(Collectors.toList());
     }
 }
